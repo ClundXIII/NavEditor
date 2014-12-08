@@ -53,6 +53,33 @@ if(! file_exists($fpath)) {
         }
     
 }
+
+global $is_admin;
+
+//by default the visitor is not allowed to visit this site:
+$allowedToVisit = false;
+
+if (isset($is_admin) && $is_admin){
+    $allowedToVisit = true;
+}
+else {
+    if (key_exists($site_class, $ne_user_site_persmissions)){
+        if ($ne_user_site_persmissions[$site_class] == '0'){
+            //Public sites:
+            $allowedToVisit = true;
+        }
+        elseif ($ne_user_site_persmissions[$site_class] == $g_current_user_permission) {
+            //user has the rights:
+            $allowedToVisit = true;
+        }
+    }
+}
+
+if (!$allowedToVisit) {
+    //if not allowed, view the forbidden site:
+    $site_class = "forbidden";
+}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

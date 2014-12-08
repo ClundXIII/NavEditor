@@ -222,6 +222,54 @@ $ne_user_php_persmissions = array(
 
 );
 
+$ne_user_site_persmissions = array (
+    //Public
+    'aktivierung'           => '0',
+    'credits'               => '0',
+    'help_details'          => '0',
+    'help_forum_blog'       => '0',
+    'help_special_faq'      => '0',
+    'help_using'            => '0',
+    'index'                 => '0',
+    'licence'               => '0',
+    'login'                 => '0',
+    'pwrecovery'            => '0',
+
+    //User
+    'dashboard'             => 'user',
+    'logout'                => 'user',
+    'nav_editor'            => 'user',
+
+
+    //Redaktor
+    'default_editor'        => 'redaktor',
+    'file_editor'           => 'redaktor',
+    'ma_editor'             => 'redaktor',
+    'remove_caches'         => 'redaktor',
+
+
+    //Admin
+    'debug'                 => 'admin',
+    'areas_manager'         => 'admin',
+    'conf_editor'           => 'admin',
+    'design_editor'         => 'admin',
+    'update'                => 'admin',
+    'user_manager'          => 'admin',
+    'website_editor'        => 'admin',
+
+    //include only => need to be admin if called directly
+    'auth'                  => 'admin',//includ only
+    'common_footer'         => 'admin',//include only
+    'common_nav_menu'       => 'admin',//include only
+
+    'file_editor_old'       => 'admin',//testing
+    'design_editor_old'     => 'admin',//testing
+    'nav_editor_old'        => 'admin',//testing
+    'osm_popover'           => 'admin',//testing
+    'file_editor_popover'   => 'admin',//testing
+
+);
+
 //public paths
 $ne_user_public_php = array();
 foreach ($ne_user_php_persmissions as $path => $permission) {
