@@ -88,7 +88,15 @@ if (!$allowedToVisit) {
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title><?php echo($ne_site_info['site_name'][$site_class]);?> - <?php echo($ne_config_info['app_titleplain']); ?></title>
+        <title><?php
+
+            //if there is no site name inside the config, just print the default name:
+            if (key_exists($site_class, $ne_site_info['site_name'])){
+                echo($ne_site_info['site_name'][$site_class]);
+            } else {
+                echo($ne_site_info['site_name']["default"]);
+            }
+            ?> - <?php echo($ne_config_info['app_titleplain']); ?></title>
 
         <?php
         echo NavTools::includeFE($site_class);

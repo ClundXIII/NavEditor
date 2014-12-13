@@ -257,7 +257,48 @@ $ne_site_info['site_name'] = array(
     "conf_editor"     => "Konfigurationen bearbeiten",
     "ma_editor"       => "Mitarbeiter bearbeiten",
     "design_editor"   => "Design wechseln",
-    "debug"           => "Status und Fehlersuche"
+    "debug"           => "Status und Fehlersuche",
+    "default"         => "Settings"
+);
+
+$ne_exclude = array(
+
+    //the ssi files that *should* not be an area, will be viewed crossed out in debug
+    "ssi"   => array(
+        "browserwarnung",
+        "footerinfos",
+        "head-d3",
+        "head-d4",
+        "head-d5",
+        "head-d6",
+        "head-d7",
+        "head-flexi",
+        "head-techfak-2013",
+        "head-techfak",
+        "head",
+        "kopf",
+        "kurzinfo-dunkel",
+        "kurzinfo-hell",
+        "zielgruppenmenu-dynamic",
+        "zielgruppenmenu-static",
+        "zielgruppenmenu"
+    ),
+    //the *.php files that are not a site class
+    "sites" => array(
+        "aktivierung",
+        "auth",
+        "autoload",
+        "common_footer",
+        "common_nav_menu",
+        "default_editor",
+        "file_editor_popover",
+        "index",
+        "login",
+        "logout",
+        "not_found",
+        "osm_popover",
+        "pwrecovery.php"
+    )
 );
 
 $ne_site_info['fe_include'] = array(
@@ -343,7 +384,7 @@ $ne_site_info['fe_include'] = array(
     ),
     "default" => array(
         "fe" => array(
-            //
+            "magic.js"
         ),
         "html" => array(
             "default"

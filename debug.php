@@ -23,7 +23,7 @@ function isShtml($filename){
 
 function printArray(array $toPrint){
     foreach ($toPrint as $element){
-        echo $element . '<br>';
+        echo $element . "<br>\n";
     }
 }
 
@@ -40,11 +40,11 @@ function removeEnding(array $filenames){
     return $retArray;
 }
 
-function putCheckboxInFront(array $areaNames){
+function generateCheckboxInFront(array $areaNames){
     $i = 0;
     $retArray = Array(sizeof($areaNames));
     foreach ($areaNames as $name){
-        $retArray[$i] = '<input type="checkbox" id="' . $name . '">' . $name;
+        $retArray[$i] = '<input type="checkbox" id="' . $name . '">';
         $i++;
     }
     return $retArray;
@@ -64,8 +64,20 @@ echo '</td><td><h4>Import .shtml files / areas:</h4>';
 
 echo '<form>';
 
+global $ne_exclude;
+
 $possibleAreas = removeEnding($shtmlfileList);
-printArray(putCheckboxInFront(array_diff($possibleAreas, $allLists)));
+$possibleAreas = array_diff($possibleAreas, $allLists);
+sort($possibleAreas);
+$checkBoxes = generateCheckboxInFront($possibleAreas);
+$arraysToPrint = array();
+for ($i=0; $i<sizeof($possibleAreas); $i++){
+    if (array_key_exists($i, $possibleAreas) && in_array($possibleAreas[$i], $ne_exclude["ssi"])){
+        $possibleAreas[$i] = '<s>' . $possibleAreas[$i] . '</s>';
+    }
+    $arraysToPrint[$i] = $checkBoxes[$i] . $possibleAreas[$i];
+}
+printArray($arraysToPrint);
 ?><button onclick="ne_debug.importAreas()">Import Area</button><button onclick="ne_debug.deleteAreaFile()">delete Area file</button>(only use this if you know what you do!!!)<?php
 echo '</form></td>';
 
