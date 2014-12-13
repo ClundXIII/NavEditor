@@ -186,7 +186,7 @@
         })
 
         // The FileUploadController initializes the fileupload widget and
-        // provides scope methods to control the File Upload functionality: 
+        // provides scope methods to control the File Upload functionality:
         .controller('FileUploadController', [
             '$scope', '$element', '$attrs', '$window', 'fileUpload',
             function ($scope, $element, $attrs, $window, fileUpload) {

@@ -4,14 +4,14 @@ Version 2.13.0306
 
 Version 2.13.0219
 * Sidebar in Allgemeine Bereiche aufgenommen. Die Sidebar wird fuer neue HTML5-Designs
-  verwendet und ist optional. 
+  verwendet und ist optional.
 
 
 Version 2.13.0131
 * Korrektur bei der Zuweisung von Benutzerrollen bei Updates von Altversionen,
   bei denen Redakteure noch keine Rollen hatten.
 * Aktualisierte Hilfeseite
-* Neue Bildvorschauanzeige-Funktionen fuer den Bereiche Bilder&Dateien. 
+* Neue Bildvorschauanzeige-Funktionen fuer den Bereiche Bilder&Dateien.
   (Beta, Noch in Arbeit)
 
 
@@ -26,7 +26,7 @@ Version 2.12.0718
     Dateien setzbar.
   - Eingabe von Profildaten fuer einzelne Benutzer: Darunter Mailadresse.
   - Passwort zuruecksetzen fuer normale Benutzer (Wenn diese eine gueltige
-    E-Mailadresse im Profil haben) 
+    E-Mailadresse im Profil haben)
 * Fehlerbehebung bei dem Upload von Dateien mit Umlauten und Sonderzeichen.
   Diese Zeichen werden automatisch konvertiert.
 
@@ -34,7 +34,7 @@ Version 2.12.0718
 Version 2.12.0312
 * Kleinere Bugs beim Dateiexplorer gelöst. Fehlendes Icon für neue Dateien
   ergänzt
-* Design-Wechsel-Funktion erkennt nun, wenn -z.B. aufgrund einer veralteten 
+* Design-Wechsel-Funktion erkennt nun, wenn -z.B. aufgrund einer veralteten
   CSS-Vorlage- die Optionendatei layout.css nicht vorhanden und nutzbar
   ist.
 * Bearbeitung von "Allgemeinen Bereichen" ist nun provisorisch eingeschraenkt
@@ -53,7 +53,7 @@ Version 2.12.0201
         Admin im Dateiexplorer
      c) Optische Anpassung bei der Seitenbearbeitung und Entfernung
         inzwischen veralteter Funktionen ("Quicklinks", "Direktlinks").
-     
+
 
 Version 2.12.0130
 * Fehlerredundanz eingebaut fuer den Fall von Inhatsbereichen, bei denen
@@ -69,12 +69,12 @@ Version 2.12.0118
 * Kleinere Fehlerkorrekturen
 
 Version 2.12.0114
-* Neue Stabile Version mit allen Änderungen und Neuerungen aus den Testversionen 
+* Neue Stabile Version mit allen Änderungen und Neuerungen aus den Testversionen
   seit dem  7. September 2011. Wesentliche Änderungen sind:
-  a) Neuer Benutzeroberfläche und Menustruktur 
+  a) Neuer Benutzeroberfläche und Menustruktur
   b) Aktuellere Version der TinyMCE-Editors
   c) Neuer Dateiexplorer
-  d) verbessertes Sitzungshandling und Passwort-Vergessen-Funktionen 
+  d) verbessertes Sitzungshandling und Passwort-Vergessen-Funktionen
 
 Version 2.12.0113
 * Aufbereitung der Update-Funktion
@@ -88,7 +88,7 @@ Version 2.12.0111
 * Anpassung der Sessionbehandlung bei bereits angemeldeten Usern
 
 Version 2.11.1213
-* Verbesserung des Sitzungshandlings; Behebung des Problems mit fehlerhaften Logins nach 
+* Verbesserung des Sitzungshandlings; Behebung des Problems mit fehlerhaften Logins nach
   (stundenlangen) idlen des NavEditors in einem unbenutzten Browser
 
 Version 2.11.1208
@@ -105,7 +105,7 @@ Version 2.11.1201
   aktualisiert um den Zweck dieser Bereiche deutlich zu machen und um Tipps bei einer Fehlbedienung (unabsichtlichen
   Loeschen von dynamischen Elementen) zu geben.
 * Der neu gebaute Bereich Seiten bearbeiten / Bilder & Dateien befindet sich noch in der Testphase.
-  Folgende Hinweise gelten fuer diesen Bereich: 
+  Folgende Hinweise gelten fuer diesen Bereich:
   - Bei dem Hochladen von Bildern kommt es derzeit zu einem Fehler bei der automatischen Erstellung einer Thumbnail.
   - Es ist derzeit aus diesem Bereich nicht moeglich, neue Unterverzeichnisse unterhalb des Hauptverzeichnis
     zu erstellen. (Es ist aber moeglich unter vorhandenen Verzeichnissen neue Unterverzeichnisse zu erstellen).
@@ -114,7 +114,7 @@ Version 2.11.1201
 
 Version 2.11.1111
 * Neues jQuery-Interface zum Upload von Dateien
-* Behebung des Problems fehlerhafter Logins bei bestehendem unbenutzten Browser-Tab/Fenster 
+* Behebung des Problems fehlerhafter Logins bei bestehendem unbenutzten Browser-Tab/Fenster
 
 Version 2.11.1101
 * Weitere Verbesserung bei dem Setzen des Logos: Bei einem Kopfteil der nichts ausser einem Logo enthalten soll (also auch keinen Namen!), wird auch kein Platzhalter verwendet.
@@ -162,7 +162,7 @@ Version 2.11.0706
 
 * Einbau von Platzhaltern im Seiteneditor fuer dynamische Bereiche von Feedimport und UnivIS-
   Import
- 
+
 Diese Version ist eine Testversion!  Der Einsatz erfolgt auf eigene Gefahr.
 Wir empfehlen vor dem Einsatz eine Sicherung der Daten vorzunehmen oder diese
 Testversion nur auf einer eigenen Test-Website zu pruefen.
@@ -189,7 +189,7 @@ Version 2.11.0325
   Um die aktuellen CGI-Skripten zur Navigation zu bekommen, kopieren Sie die Inhalte des Muster-
   Verzeichnisses
      /proj/websource/docs/muster/www.defaultwebauftritt.uni-erlangen.de/cgi-bin/navigation/
-  in das gleichnamige CGI-Verzeichnis in ihrem Webauftritt. 
+  in das gleichnamige CGI-Verzeichnis in ihrem Webauftritt.
 
 
 Version 2.11.0321
@@ -240,20 +240,20 @@ Version 2.10.0824
 * Bugfixes
 
 Version 2.10.0623
-* Einfuegen von Flaggen (kleinen Bildern) im TechMenue (neben Kontakt, Impressum, Suche usw.) moeglich 
+* Einfuegen von Flaggen (kleinen Bildern) im TechMenue (neben Kontakt, Impressum, Suche usw.) moeglich
 * Mitarbeiter Zusatzinfo bearbeiten erganzt, jetzt mit Inhalsbloecke
 * Fehler beim Designwechseln behoben
 * Bugfixes
 
 Version 2.10.0615
 * Mitarbeiter Zusatzinfo bearbeiten erganzt, jetzt mit Inhalsbloecke
-* Einfuegen von Flaggen (kleinen Bildern) im TechMenue (neben Kontakt, Impressum, Suche usw.) moeglich 
+* Einfuegen von Flaggen (kleinen Bildern) im TechMenue (neben Kontakt, Impressum, Suche usw.) moeglich
 * Fehler beim Designwechseln behoben
 * Bugfixes
 
 Version 2.10.0611
 * Mitarbeiter Zusatzinfo bearbeiten erganzt, jetzt mit Inhaltsbloecke
-* Einfuegen von Flaggen (kleinen Bildern) im TechMenue (neben Kontakt, Impressum, Suche usw.) moeglich 
+* Einfuegen von Flaggen (kleinen Bildern) im TechMenue (neben Kontakt, Impressum, Suche usw.) moeglich
 * Fehler beim Designwechseln behoben
 
 Version 2.10.0511

@@ -8,7 +8,7 @@ var navTreeOper = {
 	_cloneObject: function(obj) {
 		if(typeof obj !== 'object' || obj == null)
 			return obj;
-		
+
 		var c = obj instanceof Array ? [] : {};
 		for(var i in obj) {
 			var prop = obj[i];
@@ -31,24 +31,24 @@ var navTreeOper = {
 		}
 		return c;
 	},
-	
+
 	_jsonObject: {},
 	_jsonString: "",
-	
+
 	// 3 parts json: A, Z, S
 	_jsonNavNormal: [],
 	_jsonNavExtra: [],
 	_jsonNavSpec: [],
-	
+
 	_dirHtmlNormal: "",
 	_dirHtmlExtra: "",
 	_dirHtmlSpec: "",
-	
+
 	// current objects
 	_currentKey: "",
 	_currentNode: {},
 	_currentNodeGroup: [],
-	
+
 	// oper flags
 	_canAddSibling: false,
 	_canAddChild: false,
@@ -58,35 +58,35 @@ var navTreeOper = {
 //	_canPasteAsChild: false,
 	_canMoveUp: false,
 	_canMoveDown: false,
-	
+
 	_clipBoard: {
 		depth: 0,
 		data: {}
 	},
-	
+
 	_treeDepth: 1,
-	
+
 	_undoStack: [],
-	
+
 	// html containers
 	dirHtmlPanelId: "",
 	dirDivIdNormal: "",
 	dirDivIdExtra: "",
 	dirDivIdSpec: "",
 	debugInfoPanelId: "",
-	
+
 	nodeEventFuncName: "",
 	withInterfaceElements: true,
-	
+
 	setCurrentKey: function(ckey) {
 		this._currentKey = ckey;
 	},
-	
+
 	setCurrentNode: function(cnode) {
 		this._currentNode = cnode;
 		this._currentKey = cnode.key;
 	},
-	
+
 	setCurrentNodeGroup: function(groupType) {
 		switch(groupType) {
 			case "Z":
@@ -100,15 +100,15 @@ var navTreeOper = {
 				break;
 		}
 	},
-	
+
 	getCurrentNode: function() {
 		return this._currentNode;
 	},
-	
+
 	getCurrentNodeGroup: function() {
 		return this._currentNodeGroup;
 	},
-	
+
 	_hasClipData: function() {
 		if((this._clipBoard.depth > 0) && (this._clipBoard.data != null)) {
 			return true;
@@ -116,7 +116,7 @@ var navTreeOper = {
 			return false;
 		}
 	},
-	
+
 	_getNodeType: function(nodeKey) {
 		var firstLetter = nodeKey.substr(0, 1);
 		if((firstLetter.toUpperCase() == "S") || (firstLetter.toUpperCase() == "Z")) {
@@ -125,7 +125,7 @@ var navTreeOper = {
 			return "A";
 		}
 	},
-	
+
 	_genDirHtmlNormal: function(jsonData) {
 		if(jsonData.length < 1) {
 			return;
@@ -145,7 +145,7 @@ var navTreeOper = {
 		}
 		this._dirHtmlNormal += "</ul>";
 	},
-	
+
 	_genDirHtmlExtra: function(jsonData) {
 		if(jsonData.length < 1) {
 			return;
@@ -161,7 +161,7 @@ var navTreeOper = {
 		}
 		this._dirHtmlExtra += "</ul>";
 	},
-	
+
 	_genDirHtmlSpec: function(jsonData) {
 		if(jsonData.length < 1) {
 			return;
@@ -177,18 +177,18 @@ var navTreeOper = {
 		}
 		this._dirHtmlSpec += "</ul>";
 	},
-	
+
 	init: function() {
 		$("#" + this.dirDivIdNormal).empty();
-		
+
 		this._dirHtmlNormal = "";
 		this._dirHtmlExtra = "";
 		this._dirHtmlSpec = "";
-		
+
 		this._currentKey = "";
 		this._currentNode = {};
 		this._currentNodeGroup = [];
-		
+
 		this._canAddSibling = false;
 		this._canAddChild = false;
 //		this._canCut = false;
@@ -197,12 +197,12 @@ var navTreeOper = {
 		this._canRemove = false;
 		this._canMoveUp = false;
 		this._canMoveDown = false;
-		
+
 		$("#" + this.debugInfoPanelId).text("Ready.");
-		
+
 		this.updateButtons();
 	},
-	
+
 	locateNode: function(nodeKey) {
 		var ntyp = this._getNodeType(nodeKey);
 		if(ntyp != "A") { // S and Z pages, are all on root (no hierarchy)
@@ -210,7 +210,7 @@ var navTreeOper = {
 				this._currentNodeGroup = this._jsonNavExtra;
 			else
 				this._currentNodeGroup = this._jsonNavSpec;
-			
+
 			for(var j = 0; j < this._currentNodeGroup.length; j++) {
 				if(this._currentNodeGroup[j].key == nodeKey) {
 					this._canAddSibling = true;
@@ -221,14 +221,14 @@ var navTreeOper = {
 					this._canRemove = true;
 					this._canMoveUp = (j == 0) ? false : true;
 					this._canMoveDown = (j == this._currentNodeGroup.length - 1) ? false : true;
-					
+
 					return this._currentNodeGroup[j];
 				}
 			}
 		} else { // normal pages, but be ware of U
 			if(nodeKey == "U") { // special
 				this._currentNodeGroup = this._jsonNavNormal;
-				
+
 				this._canAddSibling = true;
 				this._canAddChild = false;
 /*				this._canCut = false;
@@ -239,13 +239,13 @@ var navTreeOper = {
 				this._canRemove = false;
 				this._canMoveUp = false;
 				this._canMoveDown = false;
-				
+
 				return this._jsonNavNormal[0];
 			} else { // normal node, with hierarchy
 				var arrKeys = nodeKey.split("-");
 				if(arrKeys.length == 1) { // root level: Ax
 					this._currentNodeGroup = this._jsonNavNormal;
-					
+
 					this._canAddSibling = true;
 					this._canAddChild = true;
 /*					this._canCut = true;
@@ -254,13 +254,13 @@ var navTreeOper = {
 						this._canPasteAsChild = true;
 					}*/
 					this._canRemove = true;
-					
+
 					var arrRootLevelKeys = /A(\d+)/.exec(nodeKey);
 					var rootIdx = arrRootLevelKeys[1] * 1; // convert to int
-					
+
 					this._canMoveUp = (rootIdx == 1) ? false : true;
 					this._canMoveDown = (rootIdx == this._currentNodeGroup.length - 1) ? false : true;
-					
+
 					return this._jsonNavNormal[rootIdx];
 				} else { // most complicated part
 					// >_<...
@@ -272,7 +272,7 @@ var navTreeOper = {
 						this._canPasteAsChild = true;
 					}*/
 					this._canRemove = true;
-					
+
 					var idx0 = arrKeys[0].substr(1) * 1;
 					var idx1 = arrKeys[arrKeys.length - 1].substr(1) * 1;
 					this._currentNodeGroup = this._jsonNavNormal[idx0].child;
@@ -280,16 +280,16 @@ var navTreeOper = {
 						idx0 = arrKeys[i - 1].substr(1) * 1;
 						this._currentNodeGroup = this._currentNodeGroup[idx0 - 1].child; // root level, number = index, deeper ones must -1
 					}
-					
+
 					this._canMoveUp = (idx1 - 1 == 0) ? false : true;
 					this._canMoveDown = (idx1 == this._currentNodeGroup.length) ? false : true;
-					
+
 					return this._currentNodeGroup[idx1 - 1];
 				}
 			}
 		}
 	},
-	
+
 	updateButtons: function() {
 		$("#btnAddSibling").attr("disabled", !this._canAddSibling);
 		$("#btnAddChild").attr("disabled", !this._canAddChild);
@@ -300,31 +300,31 @@ var navTreeOper = {
 		$("#btnMoveUp").attr("disabled", !this._canMoveUp);
 		$("#btnMoveDown").attr("disabled", !this._canMoveDown);
 	},
-	
+
 	refreshNavTree: function(jsonTreeData) {
 		if(this.withInterfaceElements) {
 			this.init();
 			$("#" + this.debugInfoPanelId).text("Tree-Data loaded...");
 		}
-		
+
 		this._jsonObject = jsonTreeData;
 		this._jsonNavNormal = jsonTreeData.A;
 		this._jsonNavExtra = jsonTreeData.Z;
 		this._jsonNavSpec = jsonTreeData.S;
-		
+
 		this._reIndex(this._jsonNavNormal);
 		this._reIndex(this._jsonNavExtra);
 		this._reIndex(this._jsonNavSpec);
-		
+
 		this.addPathInfo(this._jsonNavNormal);
 		this.addPathInfo(this._jsonNavExtra);
 		this.addPathInfo(this._jsonNavSpec);
-		
+
 		if(this.withInterfaceElements) {
 			this._genDirHtmlNormal(this._jsonNavNormal);
 			this._genDirHtmlExtra(this._jsonNavExtra);
 			this._genDirHtmlSpec(this._jsonNavSpec);
-			
+
 			$("#" + this.dirDivIdNormal).html(this._dirHtmlNormal);
 			$("#" + this.dirDivIdExtra).html(this._dirHtmlExtra);
 			if(this._dirHtmlExtra == "") {
@@ -338,11 +338,11 @@ var navTreeOper = {
 			} else {
 				$("#btnNewSpecNode").hide();
 			}
-			
+
 			eval(this.nodeEventFuncName);
 		}
 	},
-	
+
 	_hasDupTitle: function(title, nodes) {
 		for(var i = 0, li = nodes.length; i < li; i++) {
 			if(nodes[i].title.toLowerCase() == title.toLowerCase()) {
@@ -352,10 +352,10 @@ var navTreeOper = {
 		}
 		return false;
 	},
-	
+
 	_checkDupFileName: function(title, nodes) {
 		var fname = this.getFileName2(title);
-		
+
 		for(var i = 0, li = nodes.length; i < li; i++) {
 			if(this.getFileName(nodes[i]) == fname) {
 				var alias = prompt("There is already a file with the same name, you must specify an alias:");
@@ -364,7 +364,7 @@ var navTreeOper = {
 		}
 		return false;
 	},
-	
+
 	_reIndex: function(nodes) {
 		if(nodes.length < 1) {
 			return;
@@ -373,7 +373,7 @@ var navTreeOper = {
 		if(nodes.length > 9) {
 			_pad = true;
 		}
-		
+
 		var testKey = nodes[0].key;
 		var typ = this._getNodeType(testKey);
 		if(typ == "A") { // normal nodes
@@ -422,24 +422,24 @@ var navTreeOper = {
 			}
 		}
 	},
-	
+
 	addSibling: function(titleText) {
 		if(this._jsonObject == null) {
 			alert("ERROR: _jsonObject == null");
 			return null;
 		}
-		
+
 		if(this._hasDupTitle(titleText, this._currentNodeGroup)) {
 			return null;
 		}
-		
+
 		var alias = this._checkDupFileName(titleText, this._currentNodeGroup);
 		var alias2 = alias;
 		while(alias != false) {
 			alias2 = alias;
 			alias = this._checkDupFileName(alias, this._currentNodeGroup);
 		}
-		
+
 		var newNodeObj = {
 			"key": "",
 			"title": titleText,
@@ -457,7 +457,7 @@ var navTreeOper = {
 			"title_icon_title": "",
 			"title_display": ""
 		};
-		
+
 		var path = this._currentKey;
 		var arrPath = path.split("-");
 		switch(arrPath.length) {
@@ -503,17 +503,17 @@ var navTreeOper = {
 		this.refreshNavTree(this._jsonObject);
 		return newNodeObj;
 	},
-	
+
 	addChild: function(titleText) {
 		if(this._jsonObject == null) {
 			alert("ERROR: _jsonObject == null");
 			return null;
 		}
-		
+
 		if(this._hasDupTitle(titleText, this._currentNode.child)) {
 			return null;
 		}
-		
+
 		var newChildObj = {
 			"key": "",
 			"title": titleText,
@@ -531,7 +531,7 @@ var navTreeOper = {
 			"title_icon_title": "",
 			"title_display": ""
 		};
-		
+
 		var path = this._currentKey;
 		var arrPath = path.split("-");
 		switch(arrPath.length) {
@@ -568,7 +568,7 @@ var navTreeOper = {
 		this.refreshNavTree(this._jsonObject);
 		return newChildObj;
 	},
-	
+
 	remove: function() {
 		if(this._jsonObject == null) {
 			alert("ERROR: _jsonObject == null");
@@ -583,7 +583,7 @@ var navTreeOper = {
 //		this._reIndex(this._currentNodeGroup);
 		this.refreshNavTree(this._jsonObject);
 	},
-	
+
 	_getTreeDepth: function(tree) {
 		if(tree == null) {
 			return;
@@ -597,15 +597,15 @@ var navTreeOper = {
 			}
 		}
 	},
-	
+
 	cut: function() {
 		// tbd...
 		this._treeDepth = 1;
 		this._getTreeDepth(this._currentNode.child);
-		
+
 		this._clipBoard.depth = this._treeDepth;
 		this._clipBoard.data = this._currentNode;
-		
+
 		for(var i = 0; i < this._currentNodeGroup.length; i++) {
 			if(this._currentNodeGroup[i].key == this._currentKey) {
 				this._currentNodeGroup.splice(i, 1);
@@ -613,14 +613,14 @@ var navTreeOper = {
 			}
 		}
 	},
-	
+
 	copy: function() {
 		this._treeDepth = 1;
 		this._getTreeDepth(this._currentNode.child);
-		
+
 		this._clipBoard.depth = this._treeDepth;
 		this._clipBoard.data = this._currentNode;
-		
+
 /*		for(var i = 0; i < this._currentNodeGroup.length; i++) {
 			if(this._currentNodeGroup[i].key == this._currentKey) {
 				this._currentNodeGroup.splice(i, 1);
@@ -628,20 +628,20 @@ var navTreeOper = {
 			}
 		}*/
 	},
-	
+
 	pasteAsSibling: function() {
 		// almost the same as addSibling()
 		if(this._jsonObject == null) {
 			alert("ERROR: _jsonObject == null");
 			return;
 		}
-		
+
 		var newNodeObj = this._cloneObject(this._clipBoard.data);
-		
+
 		if(this._hasDupTitle(newNodeObj.title, this._currentNodeGroup)) {
 			return;
 		}
-		
+
 /*		var titleText = newNodeObj.title;
 		var alias = this._checkDupFileName(titleText, this._currentNodeGroup);
 		var alias2 = alias;
@@ -649,7 +649,7 @@ var navTreeOper = {
 			alias2 = alias;
 			alias = this._checkDupFileName(alias, this._currentNodeGroup);
 		}*/
-		
+
 		var path = this._currentKey;
 		var arrPath = path.split("-");
 		switch(arrPath.length) {
@@ -692,7 +692,7 @@ var navTreeOper = {
 					alert("Level too deep!");
 					return;
 				}
-				
+
 				var arrlastPart = /([A-Z])(\d+)/.exec(arrPath[arrPath.length - 1]);
 				var idx1 = arrlastPart[2] * 1;
 //				this._currentNodeGroup.splice(idx1, 0, newNodeObj);
@@ -702,19 +702,19 @@ var navTreeOper = {
 		}
 		this.refreshNavTree(this._jsonObject);
 	},
-	
+
 	pasteAsChild: function() {
 		if(this._jsonObject == null) {
 			alert("ERROR: _jsonObject == null");
 			return;
 		}
-		
+
 		var newChildObj = this._cloneObject(this._clipBoard.data);
-		
+
 		if(this._hasDupTitle(newChildObj.title, this._currentNode.child)) {
 			return;
 		}
-		
+
 		var path = this._currentKey;
 		var arrPath = path.split("-");
 		switch(arrPath.length) {
@@ -735,7 +735,7 @@ var navTreeOper = {
 					alert("Level too deep!");
 					return;
 				}
-				
+
 				var arrLastLetter = /([A-Z])/.exec(arrPath[arrPath.length - 1]);
 				var lastLetter = arrLastLetter[1];
 				if(lastLetter == "Z") {
@@ -751,29 +751,29 @@ var navTreeOper = {
 		}
 		this.refreshNavTree(this._jsonObject);
 	},
-	
+
 	getJSONObject: function() {
 		return this._jsonObject;
 	},
-	
+
 	getFileName: function(node) {
 		if(node.title == null) {
 			return "";
 		}
-		
+
 		if(node.alias != "") {
 			return node.alias;
 		}
-		
+
 		var fname = node.title;
 		fname = fname.toLowerCase();
-		
+
 		fname = fname.replace(/\u00df/g, "ss");
 		fname = fname.replace(/\u00e4/g, "ae");
 		fname = fname.replace(/\u00f6/g, "oe");
 		fname = fname.replace(/\u00fc/g, "ue");
-		
-		
+
+
 		fname = fname.replace(/_/g, "-"); 				// "_" to "-"
 		fname = fname.replace(/\s/g, "-"); 				// spaces to "-"
 		while( /\(.*\)/.test(fname) == true){			// for nested parentheses
@@ -785,21 +785,21 @@ var navTreeOper = {
 		fname = fname.replace(/([^a-z0-9\-])/g, "");	// delete all symbols except (a-z0-9 and "-")
 		fname = fname.replace(/-{2,}/g, "-"); 			// max 1 "-" in a row
 		fname = fname.replace(/^-+|-+$/g, "");			// remove all '-' at beginning/end
-		
+
 		return fname;
 	},
-	
+
 	// same as getFileName, only for checking and prompt for alias if needed
 	getFileName2: function(title) {
 		var fname = title;
 		fname = fname.toLowerCase();
-		
+
 		fname = fname.replace(/\u00df/g, "ss");
 		fname = fname.replace(/\u00e4/g, "ae");
 		fname = fname.replace(/\u00f6/g, "oe");
 		fname = fname.replace(/\u00fc/g, "ue");
-		
-		
+
+
 		fname = fname.replace(/_/g, "-"); 				// "_" to "-"
 		fname = fname.replace(/\s/g, "-"); 				// spaces to "-"
 		while( /\(.*\)/.test(fname) == true){			// for nested parentheses
@@ -811,15 +811,15 @@ var navTreeOper = {
 		fname = fname.replace(/([^a-z0-9\-])/g, "");	// delete all symbols except (a-z0-9 and "-")
 		fname = fname.replace(/-{2,}/g, "-"); 			// max 1 "-" in a row
 		fname = fname.replace(/^-+|-+$/g, "");			// remove all '-' at beginning/end
-		
+
 		return fname;
 	},
-	
+
 	getPathInfo: function(node) {
 		if(node.key == null) {
 			return "";
 		}
-		
+
 		var pkey = node.key;
 		var fname = "";
 		if(this._getNodeType(pkey) == "A") {
@@ -852,7 +852,7 @@ var navTreeOper = {
 		}
 		return fname;
 	},
-	
+
 	addPathInfo: function(tree) {
 		for(var i = 0; i < tree.length; i++) {
 			tree[i].path = this.getPathInfo(tree[i]);
@@ -861,7 +861,7 @@ var navTreeOper = {
 			}
 		}
 	},
-	
+
 	moveUp: function() {
 		if(this._jsonObject == null) {
 			alert("ERROR: _jsonObject == null");
@@ -881,7 +881,7 @@ var navTreeOper = {
 			pos++;
 		}
 		this._reIndex(this._currentNodeGroup);
-		
+
 		if(pos > 0) {
 			pos -= 1;
 		}
@@ -889,7 +889,7 @@ var navTreeOper = {
 		this.refreshNavTree(this._jsonObject);
 		return mk;
 	},
-	
+
 	moveDown: function() {
 		if(this._jsonObject == null) {
 			alert("ERROR: _jsonObject == null");

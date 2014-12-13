@@ -116,7 +116,7 @@
 
                 $.get("app/load_tree_data.php?r=" + Math.random(), {},
                 function(content) {
-                    
+
                     var data = JSON.parse(content);
 
                     navTreeOper.refreshNavTree(data);

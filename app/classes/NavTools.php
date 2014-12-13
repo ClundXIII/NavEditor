@@ -16,7 +16,7 @@ class NavTools {
     public static function wrapScriptInclude($filename){
         return '<script type="text/javascript" src="' . $filename . '"></script>' . "\n";
     }
-    
+
     /**
      * Wrapes a <style> tag around input
      * @param String $filename
@@ -26,7 +26,7 @@ class NavTools {
     public static function wrapStyleInclude($filename){
         return '<link rel="stylesheet" type="text/css" href="' . $filename . '">' . "\n";
     }
-    
+
     /**
      * include js und css files in html. from JS and CSS directory
      * there is an option to add default includes set like jQuery files etc..
@@ -104,14 +104,14 @@ class NavTools {
     public static function includeFE($frontendClass){
         global $ne_config_info;
         global $ne_site_info;
-        
+
         $retString = '';
-        
+
         $path_css = $ne_config_info['ne_url'] . $ne_config_info['fe_css_folder_name'] . '/';
         $path_js  = $ne_config_info['ne_url'] . $ne_config_info['fe_js_folder_name'] . '/';
         if (array_key_exists($frontendClass, $ne_site_info['fe_include'])){
             $retString .= NavTools::includeHtml($ne_site_info['fe_include'][$frontendClass]["html"]);
-            
+
             foreach ($ne_site_info["fe_include"][$frontendClass]["fe"] as $file){
 
                 $ext = $file;
@@ -133,7 +133,7 @@ class NavTools {
             }
         } else {
             $retString .= NavTools::includeHtml($ne_site_info['fe_include']["default"]["html"]);
-            
+
             foreach ($ne_site_info["fe_include"]["default"]["fe"] as $file){
 
                 $ext = $file;
@@ -159,7 +159,7 @@ class NavTools {
                 $retString .= NavTools::wrapScriptInclude($path_js . $frontendClass . ".js");
             }
         }
-        
+
         return $retString;
     }
 

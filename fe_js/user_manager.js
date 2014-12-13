@@ -571,9 +571,9 @@ function selectUser(userName){
 
 /* ---------- Here comes jQuery: ---------- */
 $(document).ready(function() {
-    
+
     _editable_user_params_array = array_diff_key(_empty_user_data_array, _not_editable_user_params_array);
-    
+
     //daten per ajax laden
     reloadForm();
 

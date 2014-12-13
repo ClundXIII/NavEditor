@@ -1,5 +1,5 @@
 <?php
- 
+
 class Input extends pattern\Singleton {
 
     public static $xss_hash = '';

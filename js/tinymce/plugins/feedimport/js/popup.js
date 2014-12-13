@@ -4,8 +4,8 @@ var feedimportDialog = {
 		f = document.forms[0],
 		n = ed.selection.getNode(),
 		w = dom.getAttrib(n, 'feedid');
-		
-		
+
+
 
 		//f.feedid.value = w ? parseInt(w) : (dom.getStyle('feedid') || '');
 		f.numberoffeeds.value = dom.getAttrib(n, 'numberoffeeds') || parseInt(dom.getStyle('numberoffeeds')) || '';
@@ -23,7 +23,7 @@ var feedimportDialog = {
 		feedNumName = feedNumNamePattern.exec(f.feedid[f.feedid.selectedIndex].text),
 		feed = feedNumName[1],
 		feedName = feedNumName[2],
-		
+
 		maxnum = f.numberoffeeds.value,
 		maxlett = f.numberofletters.value,
 		url = tinyMCEPopup.getWindowArg('plugin_url'),

@@ -7,8 +7,8 @@
           <h2>Sprungmarken</h2>
           <ul>
 		<li class="first"><a href="#contentmarke">Zum Inhalt springen</a><span class="skip">. </span></li>
-		<li><a href="#bereichsmenumarke">Zur Navigation springen</a><span class="skip">. </span></li>		
-		<li class="last"><a href="#hilfemarke">Zu den allgemeinen Informationen springen</a><span class="skip">. </span></li> 
+		<li><a href="#bereichsmenumarke">Zur Navigation springen</a><span class="skip">. </span></li>
+		<li class="last"><a href="#hilfemarke">Zu den allgemeinen Informationen springen</a><span class="skip">. </span></li>
           </ul>
         </div>
 

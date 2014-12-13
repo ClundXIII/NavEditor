@@ -14,33 +14,33 @@
 //		$("#selector").rightClick( function(el) {
 //			// Do something
 //		});
-//		
+//
 //		// Capture right mouse down
 //		$("#selector").rightMouseDown( function(el) {
 //			// Do something
 //		});
-//		
+//
 //		// Capture right mouseup
 //		$("#selector").rightMouseUp( function(el) {
 //			// Do something
 //		});
-//		
+//
 //		// Disable context menu on an element
 //		$("#selector").noContext();
-// 
+//
 // History:
 //
 //		1.00 - released (13 May 2008)
 //
 // TERMS OF USE
-// 
+//
 // This software is licensed under a Creative Commons License and is copyrighted (C)2008 by Cory S.N. LaViska.
 // For details, visit http://creativecommons.org/licenses/by/3.0/us/
 //
 if(jQuery) (function(){
-	
+
 	$.extend($.fn, {
-		
+
 		rightClick: function(handler) {
 			$(this).each( function() {
 				$(this).mousedown( function(e) {
@@ -61,7 +61,7 @@ if(jQuery) (function(){
 			});
 			return $(this);
 		},
-		
+
 		rightMouseDown: function(handler) {
 			$(this).each( function() {
 				$(this).mousedown( function(e) {
@@ -78,7 +78,7 @@ if(jQuery) (function(){
 			});
 			return $(this);
 		},
-		
+
 		rightMouseUp: function(handler) {
 			$(this).each( function() {
 				$(this).mouseup( function(e) {
@@ -95,7 +95,7 @@ if(jQuery) (function(){
 			});
 			return $(this);
 		},
-		
+
 		noContext: function() {
 			$(this).each( function() {
 				$(this)[0].oncontextmenu = function() {
@@ -104,7 +104,7 @@ if(jQuery) (function(){
 			});
 			return $(this);
 		}
-		
+
 	});
-	
-})(jQuery);	
+
+})(jQuery);

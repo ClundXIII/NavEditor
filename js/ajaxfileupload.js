@@ -17,12 +17,12 @@ jQuery.extend({
 		io.style.position = 'absolute';
 		io.style.top = '-3000px';
 		io.style.left = '-3000px';
-		
+
 		document.body.appendChild(io);
-		
-		return io			
+
+		return io
     },
-    
+
 	createUploadForm: function(id, fileElementId, customHiddenData, maxFileSize) {
 		// create form
 		var formId = 'jUploadForm' + id;
@@ -37,7 +37,7 @@ jQuery.extend({
 		$(form).css('position', 'absolute');
 		$(form).css('top', '-3200px');
 		$(form).css('left', '-3200px');
-		$(form).appendTo('body');		
+		$(form).appendTo('body');
 		return form;
 	},
 
@@ -48,33 +48,33 @@ jQuery.extend({
 		var form = jQuery.createUploadForm(id, s.fileElementId, s.customHiddenData, s.maxFileSize);
 		var io = jQuery.createUploadIframe(id, s.secureuri);
 		var frameId = 'jUploadFrame' + id;
-		var formId = 'jUploadForm' + id;		
+		var formId = 'jUploadForm' + id;
         // Watch for a new set of requests
         if(s.global && !jQuery.active++) {
 			jQuery.event.trigger("ajaxStart");
 		}
-		
+
 		var requestDone = false;
 		// Create the request object
 		var xml = {};
 		if(s.global)
 			jQuery.event.trigger("ajaxSend", [xml, s]);
-		
+
 		// Wait for a response to come back
-		var uploadCallback = function(isTimeout) {			
+		var uploadCallback = function(isTimeout) {
 			var io = document.getElementById(frameId);
 			try {
 				if(io.contentWindow) {
 					xml.responseText = io.contentWindow.document.body ? io.contentWindow.document.body.innerHTML : null;
-					xml.responseXML = io.contentWindow.document.XMLDocument ? io.contentWindow.document.XMLDocument : io.contentWindow.document;					 
+					xml.responseXML = io.contentWindow.document.XMLDocument ? io.contentWindow.document.XMLDocument : io.contentWindow.document;
 				} else if(io.contentDocument) {
 					xml.responseText = io.contentDocument.document.body ? io.contentDocument.document.body.innerHTML : null;
 					xml.responseXML = io.contentDocument.document.XMLDocument ? io.contentDocument.document.XMLDocument : io.contentDocument.document;
-				}						
+				}
 			} catch(e) {
 				jQuery.handleError(s, xml, null, e);
 			}
-			
+
 			if(xml || isTimeout == "timeout") {
 				requestDone = true;
 				var status;
@@ -115,10 +115,10 @@ jQuery.extend({
 				setTimeout(function() {
 					try {
 						$(io).remove();
-						$(form).remove();	
+						$(form).remove();
 					} catch(e) {
 						jQuery.handleError(s, xml, null, e);
-					}									
+					}
 				}, 100);
 				xml = null;
 			}
@@ -131,7 +131,7 @@ jQuery.extend({
 					uploadCallback("timeout");
 			}, s.timeout);
 		}
-		
+
         try {
 			// var io = $('#' + frameId);
 			var form = $('#' + formId);
@@ -144,15 +144,15 @@ jQuery.extend({
 				form.enctype = 'multipart/form-data';
 			}
 			$(form).submit();
-		} catch(e) {			
+		} catch(e) {
 			jQuery.handleError(s, xml, null, e);
 		}
-		
+
 		if(window.attachEvent) {
 			document.getElementById(frameId).attachEvent('onload', uploadCallback);
 		} else {
 			document.getElementById(frameId).addEventListener('load', uploadCallback, false);
-		} 		
+		}
         return {abort: function() {}};
 	},
 

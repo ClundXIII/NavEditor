@@ -51,7 +51,7 @@ if(! file_exists($fpath)) {
                 $site_class = "not_found";
                 break;
         }
-    
+
 }
 
 global $is_admin;
@@ -112,9 +112,9 @@ if (!$allowedToVisit) {
     <?php require($site_class . ".php"); ?>
 
         </div>
-        
+
         <?php require('common_footer.php'); ?>
-    
+
     </body>
 
 </html>

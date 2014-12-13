@@ -11,7 +11,7 @@
 (function() {
 	// Load plugin specific language pack
 	// tinymce.PluginManager.requireLangPack('feedimport');
-	
+
 	tinymce.create('tinymce.plugins.FeedImportPlugin', {
 
 		init : function(ed, url) {
@@ -37,7 +37,7 @@
 				cmd : cls,
 				image : url + '/img/feed_ico.gif'
 			});
-			
+
 			ed.onClick.add(function(ed, e) {
 				e = e.target;
 
@@ -49,7 +49,7 @@
 			ed.onNodeChange.add(function(ed, cm, n) {
 				cm.setActive('feedimport', n.nodeName == 'IMG' && ed.dom.hasClass(n, cls));
 			});
-			
+
 			ed.onBeforeSetContent.add(function(ed, o) {
 				var include_pattern = /<!--#include virtual=\"\/cgi-bin\/feeds\/feedimport\.pl(\/?[0-9]*\/?[0-9]*\/?[0-9]*)\" -->/gi;
 				var feedtmparray;
@@ -57,10 +57,10 @@
 					feedtmp = feedtmparray[1];
 					o.content = o.content.replace(/<!--#include virtual=\"\/cgi-bin\/feeds\/feedimport\.pl\/?[0-9]*\/?[0-9]*\/?[0-9]*\" -->/, feed_img());
 				}
-			
+
 				//o.content = o.content.replace(/<!--#include virtual=\"\/cgi-bin\/feeds\/feedimport\.pl\/?[0-9]*\/?[0-9]*\/?[0-9]*\" -->/g, feed_img());
 			});
-			
+
 			ed.onPostProcess.add(function(ed, o) {
 				if (o.get){
 					var img_pattern = /<img[^>]+alt=\"(\/?[0-9]*\/?[0-9]*\/?[0-9]*)[^>]+>/gi;

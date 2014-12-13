@@ -20,14 +20,14 @@
         var lng = CPTD(center.x.toString(), 'lng');
         var latLngStr = '<br/>Latitude:&nbsp;&nbsp;&nbsp;' + center.y.toString() + '<br/> Longitude: ' + center.x.toString();
 		var latStr = '' + center.y.toString();
-   		var lngStr = '' + center.x.toString();	
-		
+   		var lngStr = '' + center.x.toString();
+
         marker.openInfoWindowHtml(latLngStr);
 
 		document.getElementById('geo-lat').value = latStr;
 		document.getElementById('geo-long').value = lngStr;
-		
-		
+
+
 
         marker.openInfoWindowHtml(latLngStr);
 
@@ -44,7 +44,7 @@
            var lng = CPTD(point.x.toString(), 'lng');
            var latLngStr = '<br/>Latitude:&nbsp;&nbsp;&nbsp;' + point.y.toString() + '<br/> Longitude: ' + point.x.toString();
 		   var latStr = '' + point.y.toString();
-   		   var lngStr = '' + point.x.toString();	
+   		   var lngStr = '' + point.x.toString();
            marker.openInfoWindowHtml(latLngStr);
 
 		   document.getElementById('geo-lat').value = latStr;
@@ -74,7 +74,7 @@
               var lng = CPTD(point.x.toString(), 'lng');
               var latLngStr = '<br/>Latitude:&nbsp;&nbsp;&nbsp;' + point.y.toString() + '<br/> Longitude: ' + point.x.toString();
 			  var latStr = '' + point.y.toString();
-   		      var lngStr = '' + point.x.toString();	
+   		      var lngStr = '' + point.x.toString();
               marker.openInfoWindowHtml(latLngStr);
 
 		   	  document.getElementById('geo-lat').value = latStr;
@@ -89,7 +89,7 @@
            map.addOverlay(marker);
            var latLngStr = '<br/>Latitude:&nbsp;&nbsp;&nbsp;' + point.y.toString() + '<br/> Longitude: ' + point.x.toString();
 		   var latStr = '' + point.y.toString();
-   		   var lngStr = '' + point.x.toString();	
+   		   var lngStr = '' + point.x.toString();
            marker.openInfoWindowHtml(latLngStr);
            var lat = CPTD(point.y.toString(), 'lat');
            var lng = CPTD(point.x.toString(), 'lng');
@@ -102,8 +102,8 @@
         );
       }
     }
-	
-	
+
+
 	function setCenter(lat, lon) {
       if (GBrowserIsCompatible()) {
 
@@ -123,14 +123,14 @@
         var lng = CPTD(center.x.toString(), 'lng');
         var latLngStr = '<br/>Latitude:&nbsp;&nbsp;&nbsp;' + center.y.toString() + '<br/> Longitude: ' + center.x.toString();
 		var latStr = '' + center.y.toString();
-   		var lngStr = '' + center.x.toString();	
-		
+   		var lngStr = '' + center.x.toString();
+
         marker.openInfoWindowHtml(latLngStr);
 
 		document.getElementById('geo-lat').value = latStr;
 		document.getElementById('geo-long').value = lngStr;
-		
-		
+
+
 
         marker.openInfoWindowHtml(latLngStr);
 
@@ -147,7 +147,7 @@
            var lng = CPTD(point.x.toString(), 'lng');
            var latLngStr = '<br/>Latitude:&nbsp;&nbsp;&nbsp;' + point.y.toString() + '<br/> Longitude: ' + point.x.toString();
 		   var latStr = '' + point.y.toString();
-   		   var lngStr = '' + point.x.toString();	
+   		   var lngStr = '' + point.x.toString();
            marker.openInfoWindowHtml(latLngStr);
 
 		   document.getElementById('geo-lat').value = latStr;

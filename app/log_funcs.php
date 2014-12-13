@@ -84,7 +84,7 @@ function calcRestZeit($anzahlVersuche, $lastTry) {
     } elseif ($toWaitFunc < 0) {
         $toWaitFunc = 0;
     }
-    
+
     return $toWaitFunc;
 }
 

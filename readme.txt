@@ -6,7 +6,7 @@
   des Webauftritts abgelegt sein.
 
 Entwickler und Projektbeteiligte
-- Wolfgang Wiese, webmaster@rrze.uni-erlangen.de 
+- Wolfgang Wiese, webmaster@rrze.uni-erlangen.de
 - Dmitry Gorelenkov, dmitry.gorelenkov@gmx.net
 - Ke Chang, ke.chang@rrze.uni-erlangen.de
 

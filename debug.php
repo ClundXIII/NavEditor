@@ -31,12 +31,12 @@ function removeEnding(array $filenames){
     $i = 0;
     $retArray = Array(sizeof($filenames));
     foreach ($filenames as $name){
-        
+
         $retArray[$i] = str_replace(".shtml", "" , $name);
-        
+
         $i++;
     }
-    
+
     return $retArray;
 }
 
