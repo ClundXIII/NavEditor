@@ -55,6 +55,7 @@ if(! file_exists($fpath)) {
 }
 
 global $is_admin;
+global $ne_user_roles;
 
 //by default the visitor is not allowed to visit this site:
 $allowedToVisit = false;
@@ -68,7 +69,7 @@ else {
             //Public sites:
             $allowedToVisit = true;
         }
-        elseif ($ne_user_site_persmissions[$site_class] == $g_current_user_permission) {
+        elseif ($ne_user_roles[$ne_user_site_persmissions[$site_class]] <= $ne_user_site_persmissions[$g_current_user_permission]) {
             //user has the rights:
             $allowedToVisit = true;
         }
