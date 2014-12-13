@@ -15,8 +15,18 @@ if(! file_exists($fpath)) {
     if (!isset($_GET["p"])){
         $site_class = "dashboard";
     }
-    else
-        switch($_GET["p"]){
+    else{
+        if (in_array($_GET["p"], $ne_sites)){
+            //we got a valid site class here!
+            $site_class = $_GET["p"];
+        } elseif (in_array ($_GET["p"], $ne_redirect_sites)){
+            header('Location: ' . $_GET["p"] . ".php");
+        } elseif($_GET["p"] === ""){
+            $site_class = "dashboard";
+        } else{
+            $site_class = "not_found";
+        }
+        /*switch($_GET["p"]){
             case "dashboard":
             case "areas_manager":
             case "nav_editor":
@@ -50,7 +60,8 @@ if(! file_exists($fpath)) {
             default:
                 $site_class = "not_found";
                 break;
-        }
+        }*/
+    }
 
 }
 

@@ -83,7 +83,25 @@ echo '</form></td>';
 
 echo '</tr></table>';
 
-
 ?>
+
+<hr>
+<h3>Sites:</h3><br>
+
+<table><tr>
+<td><h4>all Sites:</h4>
+<?php
+global $ne_all_sites;
+global $ne_sites;
+
+printArray($ne_all_sites);
+?>
+</td>
+<td><h4>valid site classes:</h4>
+<?php
+printArray($ne_sites);
+?>
+</td>
+</tr></table>
 
 <hr>

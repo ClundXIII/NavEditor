@@ -297,8 +297,33 @@ $ne_exclude = array(
         "logout",
         "not_found",
         "osm_popover",
-        "pwrecovery.php"
+        "pwrecovery.php",
+        "update"
     )
+);
+
+$ne_sites = array();
+
+$fileList = scandir(".");
+$phpFileList = array();
+for ($i=0; $i<sizeof($fileList); $i++){
+    if (strpos($fileList[$i], ".php")){
+        $phpFileList[$i] = $fileList[$i];
+    }
+}
+sort($phpFileList);
+$ne_all_sites = array();
+for ($i=0; $i<sizeof($phpFileList); $i++){
+    $ne_all_sites[$i] = substr($phpFileList[$i], 0, sizeof($phpFileList[$i])-5);
+}
+$ne_sites = array_diff($ne_all_sites, $ne_exclude["sites"]);
+sort($ne_sites);
+
+//the sites that we redirect to with header('Location' . *);
+$ne_redirect_sites = array(
+    "remove_caches",
+    "update",
+    "logout"
 );
 
 $ne_site_info['fe_include'] = array(
