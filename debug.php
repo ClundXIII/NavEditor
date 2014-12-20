@@ -40,11 +40,11 @@ function removeEnding(array $filenames){
     return $retArray;
 }
 
-function generateCheckboxInFront(array $areaNames){
+function generateImportLink(array $areaNames){
     $i = 0;
     $retArray = Array(sizeof($areaNames));
     foreach ($areaNames as $name){
-        $retArray[$i] = '<input type="checkbox" id="' . $name . '">';
+        $retArray[$i] = '<a href="index.php?p=areas_manager&import=' . $name . '">import Area!</a>';
         $i++;
     }
     return $retArray;
@@ -69,7 +69,7 @@ global $ne_exclude;
 $possibleAreas = removeEnding($shtmlfileList);
 $possibleAreas = array_diff($possibleAreas, $allLists);
 sort($possibleAreas);
-$checkBoxes = generateCheckboxInFront($possibleAreas);
+$checkBoxes = generateImportLink($possibleAreas);
 $arraysToPrint = array();
 for ($i=0; $i<sizeof($possibleAreas); $i++){
     if (array_key_exists($i, $possibleAreas) && in_array($possibleAreas[$i], $ne_exclude["ssi"])){
@@ -78,12 +78,10 @@ for ($i=0; $i<sizeof($possibleAreas); $i++){
     $arraysToPrint[$i] = $checkBoxes[$i] . $possibleAreas[$i];
 }
 printArray($arraysToPrint);
-?><button onclick="ne_debug.importAreas()">Import Area</button><button onclick="ne_debug.deleteAreaFile()">delete Area file</button>(only use this if you know what you do!!!)<?php
-echo '</form></td>';
-
-echo '</tr></table>';
-
 ?>
+</form></td>'
+
+</tr></table>'
 
 <hr>
 <h3>Sites:</h3><br>
@@ -94,12 +92,25 @@ echo '</tr></table>';
 global $ne_all_sites;
 global $ne_sites;
 
-printArray($ne_all_sites);
+$ne_all_sites_linkarray = array();
+
+for ($i=0; $i<sizeof($ne_all_sites); $i++){
+    $ne_all_sites_linkarray[$i] = '<a href="' . $ne_all_sites[$i] . '.php">' . $ne_all_sites[$i] . '.php</a>';
+}
+
+printArray($ne_all_sites_linkarray);
 ?>
 </td>
 <td><h4>valid site classes:</h4>
 <?php
-printArray($ne_sites);
+
+$ne_sites_linkarray = array();
+
+for ($i=0; $i<sizeof($ne_sites); $i++){
+    $ne_sites_linkarray[$i] = '<a href="index.php?p=' . $ne_sites[$i] . '">' . $ne_sites[$i] . '</a>';
+}
+
+printArray($ne_sites_linkarray);
 ?>
 </td>
 </tr></table>

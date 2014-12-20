@@ -4,11 +4,7 @@
  */
 
 var ne_debug = {
-
-    importAreas : function(){
-        //
-    },
-
+    
     deleteAreaFile : function(){
         //
     }

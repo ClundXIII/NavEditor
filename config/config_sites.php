@@ -297,7 +297,7 @@ $ne_exclude = array(
         "logout",
         "not_found",
         "osm_popover",
-        "pwrecovery.php",
+        "pwrecovery",
         "update"
     )
 );
@@ -318,6 +318,7 @@ for ($i=0; $i<sizeof($phpFileList); $i++){
 }
 $ne_sites = array_diff($ne_all_sites, $ne_exclude["sites"]);
 sort($ne_sites);
+//$ne_sites = array_filter($ne_sites);
 
 //the sites that we redirect to with header('Location' . *);
 $ne_redirect_sites = array(
