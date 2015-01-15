@@ -27,4 +27,5 @@ var areas_manager_form = <?php echo $areas_manager_form_json ?>;
 var areas_manager_list_names = <?php echo json_encode($areas_manager_list_html)?>;
 var areas_manager_list;
 
+var areas_manager_import_vars = "<?php echo $import_vars ?>";
 </script>

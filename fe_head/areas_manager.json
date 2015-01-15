@@ -92,6 +92,15 @@
                  ],
      "css_class" : "bereichSettingsElement",
      "css_id"  : "user_role_required"
+    },
+    {
+     "e_label" : "config file existing",
+     "type"    : "input",
+     "name"    : "conf_f_ex",
+     "f_type"  : "checkbox",
+     "value"   : "cfe",
+     "css_class" : "bereichSettingsElement",
+     "css_id"  : "conf_f_ex"
     }
    ],
    "buttons" :

@@ -102,6 +102,11 @@ try {
                     $data_to_return = $AreaManager->addAreaSettings($toPass->name, (array) $toPass->data);
                     break;
 
+                case 'importAreaSettings':
+                    $toPass = json_decode($data_to_pass);
+                    $data_to_return = $AreaManager->importAreaSettings($toPass->name, (array) $toPass->data);
+                    break;
+
                 case 'deleteAreaSettings':
                     $data_to_return = $AreaManager->deleteAreaSettings($data_to_pass);
                     break;

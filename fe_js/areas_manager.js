@@ -157,10 +157,13 @@ var fe_areas_manager = {
             }
         };
 
-        if (newArea)
+        if ($("#conf_f_ex").val() === "cfe"){
+            NavTools.call_php("app/classes/AreasManager.php", "importAreaSettings", JSON.stringify(data), this.saveDataCallback);
+        } else if (newArea){
             NavTools.call_php("app/classes/AreasManager.php", "addAreaSettings", JSON.stringify(data), this.saveDataCallback);
-        else
+        } else{
             NavTools.call_php("app/classes/AreasManager.php", "updateAreaSettings", JSON.stringify(data), this.saveDataCallback);
+        }
     },
 
     deleteArea : function(name){

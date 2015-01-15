@@ -135,6 +135,40 @@ class AreasManager {
 
         return $bResult;
     }
+    /**
+     * Add new area, doesn't create a file
+     * @param string $sAreaName name of area
+     * @param array $aSettings associative array of area settings
+     * @throws Exception if new 'file_name' in settings already exists
+     * @return bool success
+     */
+    public function importAreaSettings($sAreaName, array $aSettings) {
+        //settingsinhalte, verbessern
+        if(!$this->_tryToMakeConsistent($aSettings)){
+            throw new Exception("Cannot accept settings format!");
+        }
+        //filter symbols by name
+        $sAreaName = NavTools::filterSymbols($sAreaName);
+
+        //falls dateiname bei anderen einstellungen existiert, abbrechen
+        $newFileName = $aSettings['file_name'];
+        if(!$this->_testNewFileName($newFileName)){
+            throw new Exception('Cant add, file "'. $newFileName .'" already exists');
+        }
+
+        //save settings
+        $bResult = $this->_ConfigManager->addSetting($sAreaName, $aSettings);
+
+        /*//falls erfolgreich neue Datei erstellen
+        if ($bResult) {
+            //datei mit start/end marker erstellen
+            $newAreaData = NavTools::ifsetor($aSettings['content_marker_start'],'') . "\n" .
+                           NavTools::ifsetor($aSettings['content_marker_end'],'');
+            $this->_createSSIFile($newFileName, $newAreaData);
+        }*/
+
+        return $bResult;
+    }
 
     /**
      * Remove area
